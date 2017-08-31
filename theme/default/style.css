@@ -1,0 +1,18 @@
+body{
+	line-height: 2;
+	background: #f1f1f1;
+	font-size: 1.6rem;
+}
+.container{
+	padding:0 3rem 2rem 3rem;
+	background: #ffffff;
+}
+pre {
+    margin: 2rem 0;
+    font-size: 13px;
+    line-height: 1.65;
+    color: #333;
+    background-color: #fafafa;
+    border: 1px solid #ddd;
+    border-radius: 0px;
+}
