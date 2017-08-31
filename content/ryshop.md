@@ -1,12 +1,14 @@
 2017-08-30
 RyShop 虚拟主机销售系统
+## 作品信息
 - Author：Rytia
 - Blog：www.zzfly.net
 - Page: www.zzfly.net/ryshop
 - Demo: www.hostinp.com (感谢好友李站长)
 - Release: https://github.com/zzfly256/RyShop/releases
-- **下载请移步 Release**
----
+
+## 开发背景
+
 - 本系统原本为我为 数据结构 课设所写，采用 PHP 语言，基于 Laravel 框架，前端样式魔改自 spectre，现以 MIT license 开源。
 - 本系统支持与 EasyPanel 等虚拟主机控制面板以及 SolusVM(待测试) 等VPS管理面板对接，实现付款成功之后产品的即时开通。
 - 本系统拥有 工单系统、新闻系统、推介系统 等基础模块以及外观设置、发信邮箱设置等基础功能
