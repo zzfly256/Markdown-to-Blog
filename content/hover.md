@@ -7,3 +7,5 @@
 2.如果是 `<img src='' />` 这种图片元素，那么可以通过 jQuery 监听 ``mouseover`` ``mouseout`` 这两个事件，通过以下方法改变 src 属性的值。
 
 > $("#imgId").attr('src',path);
+
+话到最后，这个提问真的是水的可以，被关闭真的也是不奇怪啦 OvO ~

@@ -6,6 +6,9 @@ body{
 .container{
 	padding:0 3rem 2rem 3rem;
 }
+.container * {
+    max-width: 100%;
+}
 h2 a,h3 a{
     color:#434A54;
     margin:25px 0 15px 0;
@@ -30,4 +33,9 @@ pre{
 }
 p{
     color:#656D78;
+}
+img{
+    box-shadow: 0px 0px 6px #ccc;
+    margin:10px auto;
+    display: block;
 }

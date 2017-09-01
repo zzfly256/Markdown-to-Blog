@@ -1,7 +1,7 @@
 <?php
 
 # 
-# Rytia Simple Blog
+# Markdown to Blog
 # Author: Rytia
 # Blog: http://www.zzfly.net
 # Powered by Parsedown
@@ -18,12 +18,12 @@ if($_SERVER["REQUEST_URI"] != '/')
 	if($request[1]=="index"){
 		header("location:/");
 	}else{
-		$content_file = '.'.$content_dir.'/'.$request[1].$extension;
+		$content_file = $local ? '.'.$content_dir.'/'.$request[1].$extension : $content_dir.'/'.$request[1].$extension;
 	}
 }
 else
 {
-	$content_file = '.'.$content_dir.'/'."index".$extension;
+	$content_file = $local ? '.'.$content_dir.'/'."index".$extension : $content_dir.'/'."index".$extension;
 }
 
 // 获取文件内容
