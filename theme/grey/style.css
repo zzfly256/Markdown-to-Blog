@@ -1,0 +1,42 @@
+body{
+	line-height: 2;
+	background: #f1f1f1;
+	font-size: 1.6rem;
+}
+.container{
+	padding:0 3rem 2rem 3rem;
+    background: #fff;
+}
+.container * {
+    max-width: 100%;
+}
+h2 a,h3 a{
+    color:#434A54;
+    margin:25px 0 15px 0;
+    display: block;
+    -webkit-transition: 200ms;
+    -moz-transition: 200ms;
+    -ms-transition: 200ms;
+    -o-transition: 200ms;
+    transition: 200ms;
+}
+h2 a:hover,h3 a:hover{
+    text-decoration: none;
+}
+pre{
+    margin: 2rem 0;
+    font-size: 13px;
+    line-height: 1.65;
+    color: #333;
+    background-color: #fafafa;
+    border: 1px solid #ddd;
+    border-radius: 0px;
+}
+p{
+    color:#656D78;
+}
+img{
+    box-shadow: 0px 0px 6px #ccc;
+    margin:10px auto;
+    display: block;
+}
