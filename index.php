@@ -7,8 +7,8 @@
 # Powered by Parsedown
 #
 
-require 'Parsedown.php';
-require 'config.php';
+require 'Parsedown';
+require 'config';
 
 // 获取请求地址
 //echo $_SERVER["REQUEST_URI"];
