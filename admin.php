@@ -1,57 +1,42 @@
 <?php
 // 判断用户登录
 session_start();
+require('RyBlog');
 
-// 已登录
-if (isset($_SESSION['user'])) {
-	// 从文件读入用户名密码
-	require('user');
-	$userInfo = md5($user."ryblog".$password);
-	
-	// 登录失败
-	if (strcmp($_SESSION['user'],$userInfo)!=0)
-	{
-		die("安全错误");
-	}
-}
-// 处理登录请求
-if (!isset($_SESSION['user'])&&isset($_POST['user'])) {
-	// 从文件读入用户名密码
-	require('user');
-	$userInfo = md5($user."ryblog".$password);
-	$loginInfo = md5($_POST['user']."ryblog".$_POST['password']);
-	
-	// 登录失败
-	if (strcmp($loginInfo,$userInfo)!=0)
-	{
-		die("用户名密码错误");
-	}
-	else{
-		$_SESSION['user'] = $loginInfo;
-	}
-}
-else if (!isset($_SESSION['user'])&&!isset($_POST['user'])) {
-// 未登录
-include('config');
-$content = <<<CNT
-<form action="/admin.php" method="POST" >
-<div class="form-group">
-	<label for="user">用户名</label>
-	<input class="form-control" name="user" placeholder="用户名"/>
-</div>
-<div class="form-group">
-	<label for="password">密码</label>
-	<input class="form-control" name="password" placeholder="密码" />
-</div>
-<input class="btn btn-default" type="submit" name="" value="登录" />
-</form>
+// 登录判断操作
+$loginResult = RyBlog::login();
+switch($loginResult){
+	case '2':
+		die('安全错误');
+		break;
+	case '3':
+		die('用户名或密码错误');
+		break;
+	case '4':
+		include('config');
+		$content = <<<CNT
+		<form action="/admin.php" method="POST" >
+		<div class="form-group">
+			<label for="user">用户名</label>
+			<input class="form-control" name="user" placeholder="用户名"/>
+		</div>
+		<div class="form-group">
+			<label for="password">密码</label>
+			<input class="form-control" name="password" placeholder="密码" />
+		</div>
+		<input class="btn btn-default" type="submit" name="" value="登录" />
+		</form>
 CNT;
-
-$rsblog = ['title' => "登录", 'content' =>$content , 'date' => NULL, 'sitename' => $sitename, 'siteurl' => $siteurl, 'theme' => '/theme/'.$theme]; 
-// 引用主题文件
-include './theme/'.$theme.'/index.php';
-die();
+		
+		RyBlog::view("登录",$content,null,$sitename,$siteurl,$theme);
+		die();
+		break;
 }
+
+// 判断是否执行退出操作
+if(isset($_GET['a'])&&$_GET['a']=='logout'):
+	RyBlog::logout();
+endif;
 
 if(isset($_POST['sitename'])):
 
@@ -124,6 +109,7 @@ $content = <<<CNT
 	<input class="form-control" name="theme" value="$theme" />
 </div>
 <input class="btn btn-default" type="submit" name="" value="提交" />
+<a href="/admin.php?a=logout" class="pull-right">注销</a>
 </form>
 CNT;
 
@@ -131,9 +117,7 @@ if (isset($info)) {
 	$content = $info.$content;
 }
 
-// 生成关联数组
-$rsblog = ['title' => "站点设置", 'content' =>$content , 'date' => NULL, 'sitename' => $sitename, 'siteurl' => $siteurl, 'theme' => '/theme/'.$theme]; 
-// 引用主题文件
-include './theme/'.$theme.'/index.php';
+RyBlog::view("站点设置",$content,null,$sitename,$siteurl,$theme);
+
 ?>
 

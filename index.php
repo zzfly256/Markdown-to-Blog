@@ -9,6 +9,7 @@
 
 require 'Parsedown';
 require 'config';
+require 'RyBlog';
 
 // 获取请求地址
 //echo $_SERVER["REQUEST_URI"];
@@ -26,20 +27,25 @@ else
 	$content_file = $local ? '.'.$content_dir.'/'."index".$extension : $content_dir.'/'."index".$extension;
 }
 
-// 获取文件内容
-$content_array = file($content_file);
-// 获取发表日期
-$content_date = $content_array[0];
-array_shift($content_array);
-// 获取页面标题
-$content_title = $content_array[0];
-array_shift($content_array);
-// 获取正文内容
-$content_text = implode("",$content_array);
-$Parsedown = new Parsedown();
+// 判断文件是否存在
+if (is_file($content_file)):
+	// 获取文件内容
+	$content_array = file($content_file);
+	// 获取发表日期
+	$content_date = $content_array[0];
+	array_shift($content_array);
+	// 获取页面标题
+	$content_title = $content_array[0];
+	array_shift($content_array);
+	// 获取正文内容
+	$content_text = implode("",$content_array);
+else:
+	$content_title = "文件未找到";
+	$content_text = "请检查地址是否正确噢！";
+	$content_date = null;
+endif;
 
-// 生成关联数组
-$rsblog = ['title' => $content_title, 'content' => $Parsedown->text($content_text), 'date' => $content_date, 'sitename' => $sitename, 'siteurl' => $siteurl, 'theme' => '/theme/'.$theme]; 
-// 引用主题文件
-include './theme/'.$theme.'/index.php';
+// 调用主题
+$Parsedown = new Parsedown();
+RyBlog::view($content_title,$Parsedown->text($content_text),$content_date,$sitename,$siteurl,$theme);
 ?>

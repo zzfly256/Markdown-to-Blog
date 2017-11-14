@@ -1,0 +1,53 @@
+<?php
+class RyBlog{
+	
+	public function view($title,$content,$date,$sitename,$siteurl,$theme)
+	{
+		// 生成关联数组
+		$rsblog = ['title' => $title, 'content' =>$content , 'date' => NULL, 'sitename' => $sitename, 'siteurl' => $siteurl, 'theme' => '/theme/'.$theme]; 
+		// 引用主题文件
+		include './theme/'.$theme.'/index.php';
+	}	
+
+	public function login(){
+		if (isset($_SESSION['user'])) {
+			// 从文件读入用户名密码
+			require('user');
+			$userInfo = md5($user."ryblog".$password);
+			
+			// session安全错误
+			if (strcmp($_SESSION['user'],$userInfo)!=0)
+			{
+				return 2;
+			}else{
+				return 1;
+			}
+		}
+		// 处理登录请求
+		if (isset($_POST['user'])&&!isset($_SESSION['user'])) {
+			// 从文件读入用户名密码
+			require('user');
+			$userInfo = md5($user."ryblog".$password);
+			$loginInfo = md5($_POST['user']."ryblog".$_POST['password']);
+			
+			// 登录失败
+			if (strcmp($loginInfo,$userInfo)!=0)
+			{
+				return 3;
+			}
+			else{
+				$_SESSION['user'] = $loginInfo;
+			}
+		}
+		if(!isset($_POST['user'])&&!isset($_SESSION['user'])){
+			// 未登录
+			return 4;
+		}
+	}
+	public function logout(){
+		unset($_SESSION['user']);
+		header("location:/admin.php");
+	}
+}
+
+?>
