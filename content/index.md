@@ -1,6 +1,5 @@
-2017-08-30
+null
 Sentris 小站
-
 ### [在HTML中如何实现鼠标指上之后更换图片的问答](http://sentris.x64.men/hover "hover")
 
 然看到有人于 segmentfault 提出这个问题，不幸由于问题过水被强制关闭了，答案写了一半无法提交甚至遗憾，那么我来这儿解答一下。

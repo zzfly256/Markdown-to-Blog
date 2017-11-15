@@ -15,5 +15,5 @@ $local = "true";
 // 文本保存目录 / 在线地址
 $content_dir = "/content";
 // 网站主题
-$theme = "default";
+$theme = "grey";
 ?>

@@ -4,34 +4,7 @@ session_start();
 require('RyBlog');
 
 // 登录判断操作
-$loginResult = RyBlog::login();
-switch($loginResult){
-	case '2':
-		die('安全错误');
-		break;
-	case '3':
-		die('用户名或密码错误');
-		break;
-	case '4':
-		include('config');
-		$content = <<<CNT
-		<form action="/admin.php" method="POST" >
-		<div class="form-group">
-			<label for="user">用户名</label>
-			<input class="form-control" name="user" placeholder="用户名"/>
-		</div>
-		<div class="form-group">
-			<label for="password">密码</label>
-			<input class="form-control" name="password" placeholder="密码" />
-		</div>
-		<input class="btn btn-default" type="submit" name="" value="登录" />
-		</form>
-CNT;
-		
-		RyBlog::view("登录",$content,null,$sitename,$siteurl,$theme);
-		die();
-		break;
-}
+RyBlog::login();
 
 // 判断是否执行退出操作
 if(isset($_GET['a'])&&$_GET['a']=='logout'):
